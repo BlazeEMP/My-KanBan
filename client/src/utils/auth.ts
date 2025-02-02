@@ -18,21 +18,33 @@ class AuthService {
     }
 
     isTokenExpired(token: string) {
-        // TODO: return a value that indicates if the token is expired
+        // Return a value that indicates if the token is expired based on it's expiration time, any token lacking expiration will not be allowed and give an appropriate error message
+        try {
+            const decodedToken = jwtDecode<JwtPayload>(token);
+            if (!decodedToken.exp) {
+                console.error('JWT token has no expiration date!!! Invalidating... Please update so all tokens have an expiration date.');
+                return true;
+            }
+            const currentTime = Math.floor(Date.now() / 1000); // Current time in seconds required for JWT comparison
+            return decodedToken.exp < currentTime; // Token is expired if token expiration passes current time, evaluates function on return
+        } catch (err) {
+            console.error('Failed to decode token. Invalidating... Please check JWT setup', err);
+            return true; // Treat as expired if token can't be decoded
+        }
     }
 
     getToken(): string {
-        // TODO: return the token
+        return localStorage.getItem('token') || '';
     }
 
     login(idToken: string) {
-        // TODO: set the token to localStorage
-        // TODO: redirect to the home page
+        localStorage.setItem('token', idToken);
+        window.location.href = '/';
     }
 
     logout() {
-        // TODO: remove the token from localStorage
-        // TODO: redirect to the login page
+        localStorage.removeItem('token');
+        window.location.href = '/login';
     }
 }
 
