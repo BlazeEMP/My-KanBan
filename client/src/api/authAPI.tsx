@@ -1,5 +1,6 @@
 import { UserLogin } from "../interfaces/UserLogin";
 
+// login POST initally generated with gpt4 copilot
 const login = async (userInfo: UserLogin) => {
   try {
     const response = await fetch('/auth/login', {
@@ -9,19 +10,15 @@ const login = async (userInfo: UserLogin) => {
       },
       body: JSON.stringify(userInfo),
     });
-
-    if (!response.ok) {
-      throw new Error('Network response was not ok');
-    }
-
     const data = await response.json();
+    if (!response.ok) {
+      throw new Error('Network response was not ok on login, check the network tab');
+    }
     return data;
   } catch (error) {
-    console.error('There was a problem with the login request:', error);
+    console.error('There was a problem with the login request: ', error);
     throw error;
   }
 }
-
-
 
 export { login };

@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from 'express';
-import * as jwt from 'jsonwebtoken';
+import jwt from 'jsonwebtoken';
 
 interface JwtPayload {
     username: string;
@@ -23,4 +23,5 @@ export const authenticateToken = (req: Request, res: Response, next: NextFunctio
         req.user = user as JwtPayload;
         return next();
     });
+    return; // this allows us to use the return value on line 12 to verify authHeader will exist, using the filter first method to check if we dont want to run any code, THEN handling code we want to execute 
 };
