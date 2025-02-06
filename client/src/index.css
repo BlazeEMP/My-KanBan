@@ -24,7 +24,7 @@ input:-moz-placeholder {
 
 a {
   font-weight: 500;
-  color: #000000;
+  color: white;
   text-decoration: inherit;
 }
 a:hover {
@@ -54,6 +54,7 @@ button {
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
+  color: white;
   background-color: #1a1a1a;
   cursor: pointer;
   transition: border-color 0.25s;
@@ -216,6 +217,7 @@ tbody tr:nth-child(odd) {
 }
 
 .editBtn {
+  color: black;
   background-color: #f9f9f9;
   border-radius: 8px;
   border: 1px solid transparent;
