@@ -1,5 +1,4 @@
 import { JwtPayload, jwtDecode } from 'jwt-decode';
-import { redirect } from 'react-router-dom';
 
 class AuthService {
     getProfile() {
@@ -40,12 +39,12 @@ class AuthService {
 
     login(idToken: string) {
         localStorage.setItem('token', idToken);
-        redirect('/');
+        window.location.href = '/';
     }
 
     logout() {
         localStorage.removeItem('token');
-        // redirect('/login'); // Redirect to login page after logout using <Link> in button instead, this requires client side rewrites only available as static site
+        // window.location.href = '/login'; // Redirect to login page after logout using <Link> in button instead, this requires client side rewrites back to index which contains react router paths to work, only available as static site on render
     }
 }
 
